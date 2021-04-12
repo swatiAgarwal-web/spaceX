@@ -30,14 +30,16 @@ step 1) setting up client-side
 - created `src/component` directory which has `<Home>` component file `Home.js` 
   install Axios to work with APIs. Axios library is used to make HTTP Calls.
   ```npm install axios```
+  
 - created `css` files as per the design
+  For Responsive Design and other UI elements, wrote custom media query (no framework used)
   
 step 2) setting up Server-side 
 Instead of just boilerplate to implement server-side rendering, 
 I followed the tutorial at: https://www.digitalocean.com/community/tutorials/react-server-side-rendering
 
 run the following to build the client-side app, bundle and transpile the server code, and start up the server on `:3006`
-npm run dev
+`npm run dev`
 
 With this in place, my local url http://localhost:3006/
 
@@ -57,7 +59,19 @@ Fixed Issues
 npm install --save-dev css-loader
 ```
 
+**ESLint for Static code quality check**
 
+ESLint is default with react.
+I've tested by omitting `useEffect` dependecies which shows error message:
+
+```
+src/component/Home.js
+  Line 42:4:  React Hook useEffect has missing dependencies: 'launchYear', 'successLand', and 'successLaunch'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+```
 
 **Performance metrics**
 
