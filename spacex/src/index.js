@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from 'react-router-dom';
 
 //indicate to the DOM renderer that we're rehydrating the app after a server-side render
 ReactDOM.hydrate(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+      <BrowserRouter>
+            <App />
+      </BrowserRouter>,
   document.getElementById('root')
 );
 

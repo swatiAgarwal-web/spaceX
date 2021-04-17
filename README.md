@@ -59,6 +59,12 @@ Fixed Issues
 npm install --save-dev css-loader
 ```
 
+install react-router-dom
+
+```
+npm install react-router-dom
+```
+
 **ESLint for Static code quality check**
 
 ESLint is default with react.

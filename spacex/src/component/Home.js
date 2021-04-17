@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Home.css";
 
 
-const Home = () => {
+const Home = (props) => {
 	// holds the response data from API
 	const [data, setData] = useState([]);
 	// selected "Launch Year" from Filter
@@ -14,7 +14,9 @@ const Home = () => {
 	const [successLand, setSuccessLand] = useState("");
 	// A flag/check to process the data to display/execute set of code snippet
 	const [isDataLoaded, setIsDataLoaded] = useState(false);
-	
+  // holds URL query parameters
+  const [urlFilter, setUrlFilter] = useState(props.filter);
+
 	useEffect (() =>{
 		/*
 		 * When the isDataLoaded is set false, make API request and set isDataLoaded to true
@@ -39,15 +41,43 @@ const Home = () => {
 			params.land_success = successLand;
 			urlParams += (urlParams) ? "&land_success="+successLand : "?land_success="+successLand;
 		}
-		
+
+    // If Page is refreshed with filter data in the URL
+    if(urlFilter) {
+      const query = new URLSearchParams(urlFilter);
+      const launchYear = query.get("launch_year");
+      const launchSuccess = query.get("launch_success");
+      const landSuccess = query.get("land_success");
+
+      if(launchYear) {
+        params.launch_year = launchYear;
+        setLaunchYear(parseInt(launchYear));
+      }
+
+      if(launchSuccess) {
+        params.launch_success = launchSuccess;
+        setSuccessLaunch(launchSuccess);
+      }
+
+      if(landSuccess) {
+        params.land_success = landSuccess;
+        setSuccessLand(landSuccess);
+      }
+
+      urlParams = urlFilter;
+
+      setUrlFilter("");
+      
+    }
+
 		axios.get("https://api.spacexdata.com/v3/launches", {
 			params : params
 		}).then ((res)=>{
 			let data = res.data;
 			setData(data);
 			setIsDataLoaded(true);
-			// change URL based on filtered data			
-			window.history.pushState(null, "", "/"+urlParams);						
+			// change URL based on filtered data		
+      window.history.pushState(null, "", "/"+urlParams);						
 		})
 		}
 	},[isDataLoaded,launchYear,successLaunch,successLand]);
@@ -58,6 +88,7 @@ const Home = () => {
 	 */
 	const handleClickLaunchYear =(event) =>{
 		let selectedLaunchYear = parseInt(event.target.innerText);
+
 		if(selectedLaunchYear === launchYear) {
 			selectedLaunchYear = "";
 		}
