@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./Home.css";
+import Loader from 'react-page-loading'
 
 
 const Home = (props) => {
@@ -80,7 +81,7 @@ const Home = (props) => {
       window.history.pushState(null, "", "/"+urlParams);						
 		})
 		}
-	},[isDataLoaded,launchYear,successLaunch,successLand]);
+	},[isDataLoaded,launchYear,successLaunch,successLand,urlFilter]);
 	
 	/*
 	 * An event when "Launch Year" is filtered
@@ -218,6 +219,7 @@ let bodyData = cardsData.length !== 0 ? (
 
 return isDataLoaded ? (
 	<React.Fragment>
+	<Loader loader={"bubble-spin"} color={"#c5e09b"} size={8}>
 	<div className="container">
 		<header className="header column">
 			SpaceX Launch Programs
@@ -238,10 +240,11 @@ return isDataLoaded ? (
 		{bodyData}
 		<footer className="footer">Developed By : Swati Agarwal</footer>
 	</div>
+	</Loader>
 	</React.Fragment>
 	
-) : (
-<div>loading...</div>
+) :(
+<div></div>
 )
 
 	
