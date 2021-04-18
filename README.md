@@ -5,7 +5,9 @@ program.
 
 **Application URL** 
 
-https://4v4r6.csb.app/
+The code is deployed to Heroku
+
+https://spacex-swati.herokuapp.com/
 
 **Prerequisites**
 
@@ -32,7 +34,11 @@ step 1) setting up client-side
   ```npm install axios```
   
 - created `css` files as per the design
-  For Responsive Design and other UI elements, wrote custom media query (no framework used)
+  For Responsive Design and other UI elements, wrote custom media query (no framework used) 
+  
+  Installed React Loader 
+  
+  ```npm install react-page-loading```
   
 step 2) setting up Server-side 
 Instead of just boilerplate to implement server-side rendering, 
